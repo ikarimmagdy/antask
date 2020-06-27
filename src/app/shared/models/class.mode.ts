@@ -8,5 +8,5 @@ export interface IClass {
 }
  
 enum ClassStatus {
- OPENED,CLOSED
+ OPEN,CLOSE
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudentService } from 'src/app/shared/services/student.service';
 
 @Component({
   selector: 'app-view-students',
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewStudentsPage implements OnInit {
 
-  constructor() { }
+  constructor(private studentServices: StudentService) { }
+
+  Students: any = [];
+  classId:number
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.studentServices.getClassesList().subscribe((res) => {
+      console.log(res)
+      this.Students = res._students;
+    })
+  }
+
+  deleteClass(_class, i) {
+    if (window.confirm('Do you want to delete Class')) {
+      this.studentServices.deleteClass(_class._id)
+        .subscribe(() => {
+          this.Students.splice(i, 1);
+          console.log('Student deleted!')
+        }
+        )
+    }
   }
 
 }
