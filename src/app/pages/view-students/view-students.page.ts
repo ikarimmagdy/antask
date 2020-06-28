@@ -17,15 +17,15 @@ export class ViewStudentsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.studentServices.getClassesList().subscribe((res) => {
+    this.studentServices. getStudentListByClassId(this.classId).subscribe((res) => {
       console.log(res)
       this.Students = res._students;
     })
   }
 
-  deleteClass(_class, i) {
+  deleteStudent(_class, i) {
     if (window.confirm('Do you want to delete Class')) {
-      this.studentServices.deleteClass(_class._id)
+      this.studentServices.deleteStudent(_class._id)
         .subscribe(() => {
           this.Students.splice(i, 1);
           console.log('Student deleted!')
