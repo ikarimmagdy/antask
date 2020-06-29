@@ -1,3 +1,4 @@
+import { DataServicesService, DataService } from './data-services.service';
 import { Injectable } from '@angular/core';
 import { BASE_URL, GET_STUDENTS } from 'src/app/home/constants/network.constants';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
@@ -6,8 +7,8 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 
-interface Response{
-  _students : IStudent[]
+interface Response {
+  _students: IStudent[]
 }
 
 @Injectable({
@@ -16,17 +17,20 @@ interface Response{
 export class StudentService {
 
   BASE_URL = BASE_URL;
-  
-  
+  students: IStudent[];
+
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private data: DataService) {
+    this.students = this.data.getStudent()
+  }
 
 
   addStudent(_class: IStudent): Observable<any> {
-    return this.http.post<IStudent>('http://localhost:3000/api/create-class', _class, this.httpOptions)
+    return this.http.post<IStudent>('http://localhost:3000/api/create-student', _class, this.httpOptions)
       .pipe(
         catchError(this.handleError<IStudent>('Add Student'))
       );
@@ -41,23 +45,23 @@ export class StudentService {
   }
 
   getStudentList(): Observable<Response> {
-    return this.http.get<Response>(BASE_URL+GET_STUDENTS)
+    return this.http.get<Response>(BASE_URL + GET_STUDENTS)
       .pipe(
         tap(_classes => console.log('Student fetched!')),
-        catchError(this.handleError<Response>('Get Classes', ))
+        catchError(this.handleError<Response>('Get Classes'))
       );
   }
 
   getStudentListByClassId(_classId): Observable<Response> {
-    return this.http.get<Response>(BASE_URL+GET_STUDENTS+ _classId)
+    return this.http.get<Response>(BASE_URL + GET_STUDENTS + _classId)
       .pipe(
         tap(_classes => console.log('Student fetched!')),
-        catchError(this.handleError<Response>('Get Classes', ))
+        catchError(this.handleError<Response>('Get Classes'))
       );
   }
 
   updateStudent(id, _class: IStudent): Observable<any> {
-    return this.http.put('http://localhost:3000/api/update-class/' + id, _class, this.httpOptions)
+    return this.http.put('http://localhost:3000/api/update-student/' + id, _class, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Student updated: ${id}`)),
         catchError(this.handleError<IStudent[]>('Student Class'))
@@ -65,7 +69,7 @@ export class StudentService {
   }
 
   deleteStudent(id): Observable<IStudent[]> {
-    return this.http.delete<IStudent[]>('http://localhost:3000/api/delete-class/' + id, this.httpOptions)
+    return this.http.delete<IStudent[]>('http://localhost:3000/api/delete-student/' + id, this.httpOptions)
       .pipe(
         tap(_ => console.log(`Class deleted: ${id}`)),
         catchError(this.handleError<IStudent[]>('Delete Student'))

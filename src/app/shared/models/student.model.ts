@@ -1,6 +1,6 @@
-export interface IStudent{
-    firstName: string 
-    lastName: string 
-    dateOfBirth: Date
+export interface IStudent {
+    firstName: string
+    lastName: string
+    dateOfBirth: string
     classId: number
 }

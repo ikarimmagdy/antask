@@ -10,7 +10,10 @@
       Classes List
     </ion-list-header>
 
-    <ion-item *ngFor="let _class of Classes" class="item-label item ios in-list ion-focusable hydrated">
+    <ion-item
+      *ngFor="let _class of Classes"
+      class="item-label item ios in-list ion-focusable hydrated"
+    >
       <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
         <h2>{{_class.name}}</h2>
         <h3>{{_class.status}}</h3>
@@ -18,21 +21,26 @@
 
       <div class="item-note" item-end>
         <button ion-button clear [routerLink]="['/edit-class/', _class._id]">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
+          <ion-icon name="create" style="zoom: 2;"></ion-icon>
         </button>
-        <button ion-button clear (click)="deleteClass(_class, i)">
-          <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+        <button ion-button clear (click)="deleteClass(_class)">
+          <ion-icon name="trash" style="zoom: 2;"></ion-icon>
         </button>
 
-        <button ion-button clear (click)="viewStudents(_class, i)">
-          <ion-icon name="create" style="zoom:2.0"></ion-icon>
+        <button ion-button clear (click)="viewStudents(_class)">
+          <ion-icon name="create" style="zoom: 2;"></ion-icon>
         </button>
       </div>
     </ion-item>
   </ion-list>
 
-   <!-- fab placed to the bottom start -->
-   <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/add-class">
+  <!-- fab placed to the bottom start -->
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    routerLink="/add-class"
+  >
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
