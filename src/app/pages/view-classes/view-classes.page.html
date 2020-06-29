@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view-classes</ion-title>
+    <ion-title>Classes</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,29 +20,22 @@
       </ion-label>
 
       <div class="item-note" item-end>
-        <button ion-button clear [routerLink]="['/edit-class/', _class._id]">
-          <ion-icon name="create" style="zoom: 2;"></ion-icon>
-        </button>
-        <button ion-button clear (click)="deleteClass(_class)">
-          <ion-icon name="trash" style="zoom: 2;"></ion-icon>
-        </button>
+        <ion-button clear [routerLink]="['/edit-class/', _class._id]">
+          Edit
+        </ion-button>
+        <ion-button clear (click)="deleteClass(_class)">
+          Delete
+        </ion-button>
 
-        <button ion-button clear (click)="viewStudents(_class)">
-          <ion-icon name="create" style="zoom: 2;"></ion-icon>
-        </button>
+        <ion-button expand="full" (click)="viewStudents(_class)"
+          >View Students</ion-button
+        >
       </div>
     </ion-item>
   </ion-list>
 
   <!-- fab placed to the bottom start -->
-  <ion-fab
-    vertical="bottom"
-    horizontal="end"
-    slot="fixed"
-    routerLink="/add-class"
+  <ion-button expand="full" (click)="viewAllStudents()"
+    >View All Students</ion-button
   >
-    <ion-fab-button>
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

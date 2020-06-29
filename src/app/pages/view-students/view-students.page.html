@@ -1,9 +1,44 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view-students</ion-title>
+    <ion-title>Students</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list class="ios list-ios hydrated">
+    <ion-list-header class="ios hydrated">
+      Students List
+    </ion-list-header>
 
+    <ion-item
+      *ngFor="let _student of Students"
+      class="item-label item ios in-list ion-focusable hydrated"
+    >
+      <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated">
+        <h2>{{_student.firstName}}</h2>
+        <h3>{{_student.lastName}}</h3>
+      </ion-label>
+
+      <div class="item-note" item-end>
+        <button ion-button clear [routerLink]="['/edit-class/', _student._id]">
+          <ion-icon name="create" style="zoom: 2;"></ion-icon>
+        </button>
+        <button ion-button clear (click)="deleteStudent(_student)">
+          <ion-icon name="trash" style="zoom: 2;"></ion-icon>
+        </button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!-- fab placed to the bottom start -->
+  <ion-fab
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+    routerLink="/add-class"
+  >
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

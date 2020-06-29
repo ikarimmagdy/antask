@@ -1,4 +1,4 @@
-import { DataServicesService, DataService } from './data-services.service';
+import { DataService } from './data-services.service';
 import { Injectable } from '@angular/core';
 import { BASE_URL, GET_STUDENTS } from 'src/app/home/constants/network.constants';
 import { HttpHeaders, HttpClient } from '@angular/common/http';

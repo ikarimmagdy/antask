@@ -17,4 +17,4 @@ import { ViewStudentsPage } from './view-students.page';
   ],
   declarations: [ViewStudentsPage]
 })
-export class ViewStudentsPageModule {}
+export class ViewStudentsPageModule { }

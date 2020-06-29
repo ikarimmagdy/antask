@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClassService } from 'src/app/shared/services/class-service.service';
 import { StudentService } from 'src/app/shared/services/student.service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-view-classes',
@@ -9,7 +10,7 @@ import { StudentService } from 'src/app/shared/services/student.service';
 })
 export class ViewClassesPage implements OnInit {
 
-  constructor(private classService: ClassService,private studentServices:StudentService) { }
+  constructor(private classService: ClassService, private studentServices: StudentService, private router: Router) { }
   Classes: any = [];
 
   ngOnInit() {
@@ -33,15 +34,18 @@ export class ViewClassesPage implements OnInit {
     }
   }
 
-  viewStudents(_class, i){
-    if (window.confirm('Do you want to delete Class')) {
-      this.studentServices.getStudentListByClassId(_class._id)
-        .subscribe(() => {
-          this.Classes.splice(i, 1);
-          console.log('Class deleted!')
-        }
-        )
-    }
+  viewStudents(_class, i) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        class_id: _class.id
+      },
+    };
+    this.router.navigate(["students"], navigationExtras);
+
   }
 
+  viewAllStudents() {
+    this.router.navigate(["students"]);
+
+  }
 }
